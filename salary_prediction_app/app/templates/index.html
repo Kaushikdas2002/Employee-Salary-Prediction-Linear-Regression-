@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Prediction</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Salary Prediction using Linear Regression</h1>
+        <form action="/predict" method="post">
+            <label for="experience">Enter years of experience:</label>
+            <input type="number" id="experience" name="experience" required {% if prediction is defined %} value="{{ request.form['experience'] }}" {% endif %}>
+            <button type="submit">Predict</button>
+        </form>
+        {% if prediction %}
+        <div class="result">
+            Predicted Salary: ${{ '{:,.2f}'.format(prediction[0]) }}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
